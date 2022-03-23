@@ -10,7 +10,6 @@
         android:id="@+id/verticalGuideline1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:orientation="vertical"
         app:layout_constraintGuide_percent=".5"
         />
@@ -19,7 +18,6 @@
         android:id="@+id/horizontalGuideline1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:orientation="horizontal"
         app:layout_constraintGuide_percent=".5"
         />
@@ -28,7 +26,6 @@
         android:id="@+id/horizontalGuideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:orientation="horizontal"
         app:layout_constraintGuide_percent=".75"
         />
@@ -37,8 +34,7 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="True"
-
+        android:text="@string/trueButton"
         app:layout_constraintEnd_toStartOf="@+id/verticalGuideline1"
         app:layout_constraintRight_toLeftOf="@id/horizontalGuideline1"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,8 +44,34 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="False"
+        android:text="@string/falseButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
         app:layout_constraintTop_toTopOf="@+id/horizontalGuideline1" />
+
+
+    <!--    How do I change the below text when changing questions?
+            Can I set them to variable that I set elsewhere?
+            Hint says to create a model per question containing color
+            as well as a question bank model to manage and shuffle the questions/colors
+            if background color is gray/ need to also change text color?-->
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/QuestionFragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="com.example.quiz_application_multi_lingual.QuestionFragment"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/horizontalGuideline1"
+        />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/QuestionFragmentContainer2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/horizontalGuideline1"
+        ></androidx.fragment.app.FragmentContainerView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

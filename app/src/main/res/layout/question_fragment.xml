@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:background="@color/teal_200">
+    <!--    How do I change the above background and below text when changing questions?
+            Can I set them to variable that I set elsewhere?
+            Hint says to create a model per question containing color
+            as well as a question bank model to manage and shuffle the questions/colors
+            if background color is gray/ need to also change text color?-->
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5sp"
+        android:textColor="@color/black"
+
+        android:text="Question Fragment"
+        android:textSize="20sp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        ></TextView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Quiz-Application-Multi-Lingual</string>
     <string name="falseButton">False</string>
     <string name="trueButton">True</string>
 </resources>
