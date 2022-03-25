@@ -2,4 +2,6 @@
     <string name="app_name">Quiz-Application-Multi-Lingual</string>
     <string name="falseButton">False</string>
     <string name="trueButton">True</string>
+
+    <string name="questionText">Empty Container</string>
 </resources>
