@@ -1,5 +1,6 @@
 package com.example.quiz_application_multi_lingual;
 
+//
 public class Question {
     String text;
     boolean answer;
