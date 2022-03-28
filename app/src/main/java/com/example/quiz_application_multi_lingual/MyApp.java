@@ -8,12 +8,14 @@ public class MyApp extends Application {
 
     int maxQuestions;
     int progress;
+    int correctAnswers;
 
     public MyApp(){
         questionBankManager = new QuestionBankManager();
 
         maxQuestions = 3;
         progress = 0;
+        correctAnswers = 0;
 
     }
 
@@ -22,6 +24,7 @@ public class MyApp extends Application {
 
         maxQuestions = 3;
         progress = 0;
+        correctAnswers = 0;
     }
     //todo add Constructor:  QuestionBankManager(numMaxQuestions)
     public void resetQuestionBank(int numMaxQuestions){
@@ -30,6 +33,7 @@ public class MyApp extends Application {
 
         maxQuestions = numMaxQuestions;
         progress = 0;
+        correctAnswers = 0;
     }
 
 }

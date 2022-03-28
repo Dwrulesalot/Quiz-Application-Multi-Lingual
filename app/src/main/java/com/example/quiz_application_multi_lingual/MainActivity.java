@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -26,14 +28,13 @@ public class MainActivity extends AppCompatActivity {
     //set max from menu in future and add functionality to QuestionBankManager
     int maxQuestions;
     int progress;
-
-    int correctAnswers = 0;
+    int correctAnswers;
 
     //need to save this later
     int lifeTimeCorrectAnswers;
     int lifeTimeTotalQuestions;
 
-
+    AlertDialog.Builder builder;
 
     //todo need to save state to ensure it works when being rotated
     @Override
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         questionBankManager = ((MyApp)getApplication()).questionBankManager;
         maxQuestions = ((MyApp)getApplication()).maxQuestions;
         progress = ((MyApp)getApplication()).progress;
-
+        correctAnswers = ((MyApp)getApplication()).correctAnswers;
 
         quizProgressBar=(ProgressBar) findViewById(R.id.progressBar);
         quizProgressBar.setMax(maxQuestions);
@@ -65,30 +66,16 @@ public class MainActivity extends AppCompatActivity {
                 answerClicked(false, v);
             }
         });
-    }
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putInt("quizProgress", progress);
-        savedInstanceState.putInt("quizMaxQuestions", maxQuestions);
-        savedInstanceState.putInt("quizScore", correctAnswers);
 
-        //savedInstanceState.putAll(savedInstanceState);
-
-        //savedInstanceState.putInt("currentQuestionID", questionBankManager.currentQuestion.textID);//does this need to be here?
+        builder = new AlertDialog.Builder(this);
     }
 
     @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        progress = savedInstanceState.getInt("quizProgress");
-        maxQuestions = savedInstanceState.getInt("quizMaxQuestions");
-        correctAnswers = savedInstanceState.getInt("quizScore");
-
-
-
-        quizProgressBar.setMax(maxQuestions);
-        quizProgressBar.setProgress(progress);
+    protected void onDestroy() {
+    super.onDestroy();
+        ((MyApp)getApplication()).maxQuestions = maxQuestions;
+        ((MyApp)getApplication()).progress = progress;
+        ((MyApp)getApplication()).correctAnswers = correctAnswers;
 
     }
 
@@ -96,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
     private void answerClicked(boolean answer, View view) {
 
         //todo:
-        // change question/color
         // summarize/save current quiz progress
 
         progress++;
@@ -106,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             //returns true if correct answer, false if incorrect
             if(questionBankManager.checkAnswer(answer)){
                 Toast.makeText(getApplicationContext(), "Correct!!!", Toast.LENGTH_SHORT).show();
-
+                correctAnswers++;
             }
             else {
                 Toast.makeText(getApplicationContext(), "Incorrect.", Toast.LENGTH_SHORT).show();
@@ -117,7 +103,12 @@ public class MainActivity extends AppCompatActivity {
         }
         //Give dialogue popup with stats
         else {
-            //
+            builder.setTitle("Results");
+            //builder.setMessage("Your purchase is: "+(String) quantity.getText()+" Pants. Your Total is: $"+(String) total.getText());
+            builder.setCancelable(true);
+            builder.setNegativeButton("OK",null);
+
+            builder.show();
         }
 
 
