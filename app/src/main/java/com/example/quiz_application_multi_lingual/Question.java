@@ -2,19 +2,19 @@ package com.example.quiz_application_multi_lingual;
 
 //
 public class Question {
-    String text;
+
+    int textID;
     boolean answer;
-    //can I use a different data type here for color?
-    String color;
+    int colorID;
 
     public Question() {
-        text = "";
+        textID = 0;
         answer = false;
-        color = "";
+        colorID = 0;
     }
-    public Question(String t, boolean a, String c) {
-        text = t;
+    public Question(int t, boolean a, int c) {
+        textID = t;
         answer = a;
-        color = c;
+        colorID = c;
     }
 }

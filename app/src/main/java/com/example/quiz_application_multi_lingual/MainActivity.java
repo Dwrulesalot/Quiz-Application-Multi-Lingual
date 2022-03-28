@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import java.io.Console;
 
 public class MainActivity extends AppCompatActivity {
     FragmentManager fm = getSupportFragmentManager();//this a good example?
@@ -18,33 +21,27 @@ public class MainActivity extends AppCompatActivity {
 
     ProgressBar quizProgressBar;
 
-    QuestionBankManager questionBankManager;
+    QuestionBankManager questionBankManager = new QuestionBankManager();
 
-    //
+    //set dynamically maybe?
     int maxQuestions = 3;
     int progress = 0;
 
+    //need to save this later
+    int lifeTimeCorrectAnswers;
+    int lifeTimeTotalQuestions;
+
+    //todo need to save state to ensure it works when being rotated
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         quizProgressBar=(ProgressBar) findViewById(R.id.progressBar);
-        //quizProgressBar.setMax(int);
-        //quizProgressBar.setProgress(int);
+        quizProgressBar.setMax(maxQuestions);
+        quizProgressBar.setProgress(progress);
 
-        //questionBankManager.currentQuestion //need to change the fragment values here using the manager
-
-        /*
-        example initial fragment
-
-        getSupportFragmentManager().beginTransaction()
-                .setReorderingAllowed(true)
-                .add(R.id.QuestionFragmentContainer, FragmentQuestion.class, null)
-                .commit();
-
-
-         */
+        changeQuestion();
 
         trueBtn = (Button) findViewById(R.id.trueButton);
         trueBtn.setOnClickListener(new View.OnClickListener() {
@@ -62,29 +59,45 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    //simple version to get it just switch to next question
     private void answerClicked(boolean answer, View view) {
 
         //todo:
-        // toast if in/correct answer
         // change question/color
-        //update progress bar
         // summarize/save current quiz progress
 
+        progress++;
+        quizProgressBar.setProgress(progress);
 
+        if(!(progress>=maxQuestions)){
+            //returns true if correct answer, false if incorrect
+            if(questionBankManager.checkAnswer(answer)){
+                Toast.makeText(getApplicationContext(), "Correct!!!", Toast.LENGTH_SHORT).show();
 
-        //should I do the below in question manager?//how do I change the questions between themselves?
-        FragmentQuestion fragmentQuestion = FragmentQuestion.newInstance(R.string.question1, R.color.red);
+            }
+            else {
+                Toast.makeText(getApplicationContext(), "Incorrect.", Toast.LENGTH_SHORT).show();
 
+            }
 
-        FragmentQuestion f = (FragmentQuestion)fm.findFragmentById(R.id.QuestionFragmentContainer);
-
-        fm.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        fm.beginTransaction().add(R.id.QuestionFragmentContainer, fragmentQuestion).commit();
-
-
+            changeQuestion();
+        }
+        //Give dialogue popup with stats
+        else {
+            //
+        }
 
 
     }
+
+    public void changeQuestion(){
+        questionBankManager.newQuestion();
+
+        FragmentQuestion fragmentQuestion = FragmentQuestion.newInstance(questionBankManager.currentQuestion.textID, questionBankManager.currentQuestion.colorID);
+        fm.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        fm.beginTransaction().replace(R.id.QuestionFragmentContainer, fragmentQuestion).commit();
+
+    }
+
+
+
 }
