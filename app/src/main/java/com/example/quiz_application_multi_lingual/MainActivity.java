@@ -21,15 +21,19 @@ public class MainActivity extends AppCompatActivity {
 
     ProgressBar quizProgressBar;
 
-    QuestionBankManager questionBankManager = new QuestionBankManager();
+    QuestionBankManager questionBankManager;
 
-    //set dynamically maybe?
-    int maxQuestions = 3;
-    int progress = 0;
+    //set max from menu in future and add functionality to QuestionBankManager
+    int maxQuestions;
+    int progress;
+
+    int correctAnswers = 0;
 
     //need to save this later
     int lifeTimeCorrectAnswers;
     int lifeTimeTotalQuestions;
+
+
 
     //todo need to save state to ensure it works when being rotated
     @Override
@@ -37,12 +41,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        questionBankManager = ((MyApp)getApplication()).questionBankManager;
+        maxQuestions = ((MyApp)getApplication()).maxQuestions;
+        progress = ((MyApp)getApplication()).progress;
+
+
         quizProgressBar=(ProgressBar) findViewById(R.id.progressBar);
         quizProgressBar.setMax(maxQuestions);
         quizProgressBar.setProgress(progress);
 
-        changeQuestion();
-
+        if(progress==0) {
+            changeQuestion();//this gets called when state changes, need to fix this /add if statement to avoid - figure out way to run only once
+        }
         trueBtn = (Button) findViewById(R.id.trueButton);
         trueBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -56,6 +66,31 @@ public class MainActivity extends AppCompatActivity {
                 answerClicked(false, v);
             }
         });
+    }
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putInt("quizProgress", progress);
+        savedInstanceState.putInt("quizMaxQuestions", maxQuestions);
+        savedInstanceState.putInt("quizScore", correctAnswers);
+
+        //savedInstanceState.putAll(savedInstanceState);
+
+        //savedInstanceState.putInt("currentQuestionID", questionBankManager.currentQuestion.textID);//does this need to be here?
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        progress = savedInstanceState.getInt("quizProgress");
+        maxQuestions = savedInstanceState.getInt("quizMaxQuestions");
+        correctAnswers = savedInstanceState.getInt("quizScore");
+
+
+
+        quizProgressBar.setMax(maxQuestions);
+        quizProgressBar.setProgress(progress);
+
     }
 
 

@@ -21,6 +21,8 @@ public class QuestionBankManager {
 
     Random randomGenerator = new Random();
 
+
+    //have a default constructor and a constructor that takes a # of questions to have in the quiz
     public QuestionBankManager(){
         //will eventually need to save individual question data and also pull from saved data here?
 

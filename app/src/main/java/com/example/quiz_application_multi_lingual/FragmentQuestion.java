@@ -2,6 +2,7 @@ package com.example.quiz_application_multi_lingual;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
@@ -20,8 +21,8 @@ public class FragmentQuestion extends Fragment {
     private static final String ARG_QUESTION_ID = "questionIDParam";
     private static final String ARG_COLOR_ID = "colorIDParam";
 
-    int questionID;
-    int colorID;
+    int questionID=0;
+    int colorID=0;
 
     public FragmentQuestion() {
     }
@@ -43,6 +44,21 @@ public class FragmentQuestion extends Fragment {
             colorID = getArguments().getInt(ARG_COLOR_ID);
         }
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putInt("CurrentQuestion", questionID);
+        savedInstanceState.putInt("CurrentColor", colorID);
+    }
+/*
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        questionID = savedInstanceState.getInt("CurrentQuestion");
+        colorID =savedInstanceState.getInt("CurrentColor");
+    }
+*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
