@@ -6,6 +6,8 @@ public class QuestionBankManager {
 
     ArrayList<Question> QuestionBank;
 
+
+    //these Strings/questions need to be in the string resource list in future with each of their translations
     Question q1 = new Question("Toronto is the capital city of Ontario.", true,"purple_200");
     Question q2 = new Question("Montreal is the capital city of Quebec.", false,"purple_500");
     Question q3 = new Question("Ottawa is the capital city of Quebec.", true,"purple_700");
