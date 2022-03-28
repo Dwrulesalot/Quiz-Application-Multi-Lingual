@@ -50,9 +50,8 @@ public class MainActivity extends AppCompatActivity {
         quizProgressBar.setMax(maxQuestions);
         quizProgressBar.setProgress(progress);
 
-        if(progress==0) {
-            changeQuestion();//this gets called when state changes, need to fix this /add if statement to avoid - figure out way to run only once
-        }
+        getQuestion();
+
         trueBtn = (Button) findViewById(R.id.trueButton);
         trueBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -103,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         progress++;
         quizProgressBar.setProgress(progress);
 
-        if(!(progress>=maxQuestions)){
+        if(!(progress>maxQuestions)){
             //returns true if correct answer, false if incorrect
             if(questionBankManager.checkAnswer(answer)){
                 Toast.makeText(getApplicationContext(), "Correct!!!", Toast.LENGTH_SHORT).show();
@@ -122,6 +121,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    public void getQuestion(){
+        FragmentQuestion fragmentQuestion = FragmentQuestion.newInstance(questionBankManager.currentQuestion.textID, questionBankManager.currentQuestion.colorID);
+        fm.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        fm.beginTransaction().replace(R.id.QuestionFragmentContainer, fragmentQuestion).commit();
     }
 
     public void changeQuestion(){

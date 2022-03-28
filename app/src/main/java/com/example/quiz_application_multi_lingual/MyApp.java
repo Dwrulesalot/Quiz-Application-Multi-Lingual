@@ -4,9 +4,32 @@ import android.app.Application;
 
 public class MyApp extends Application {
 
-    QuestionBankManager questionBankManager = new QuestionBankManager();
+    QuestionBankManager questionBankManager;
 
-    int maxQuestions = 3;
-    int progress = 0;
+    int maxQuestions;
+    int progress;
+
+    public MyApp(){
+        questionBankManager = new QuestionBankManager();
+
+        maxQuestions = 3;
+        progress = 0;
+
+    }
+
+    public void resetQuestionBank(){
+        questionBankManager = new QuestionBankManager();
+
+        maxQuestions = 3;
+        progress = 0;
+    }
+    //todo add Constructor:  QuestionBankManager(numMaxQuestions)
+    public void resetQuestionBank(int numMaxQuestions){
+
+        questionBankManager = new QuestionBankManager();
+
+        maxQuestions = numMaxQuestions;
+        progress = 0;
+    }
 
 }

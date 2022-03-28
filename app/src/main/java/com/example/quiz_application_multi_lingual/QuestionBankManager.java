@@ -8,9 +8,8 @@ import java.util.Random;
 public class QuestionBankManager {
 
     ArrayList<Question> QuestionBank = new ArrayList<Question>();
-    //maybe should make a secondary arraylist to remove questions from?
 
-    //these Strings/questions need to be in the string resource list in future with each of their translations
+    //string resource list in future with each of their translations
     Question q1 = new Question(R.string.question1, true, 0);
     Question q2 = new Question(R.string.question2, false, 0);
     Question q3 = new Question(R.string.question3, false, 0);
@@ -31,7 +30,7 @@ public class QuestionBankManager {
         QuestionBank.add(q2);
         QuestionBank.add(q3);
 
-        //newQuestion();
+        newQuestion();
 
     }
 
@@ -62,24 +61,14 @@ public class QuestionBankManager {
     public void newQuestion(){
 
         //should check if array is empty first
-        int randomNewQuestion = randomGenerator.nextInt(QuestionBank.size());
-        currentQuestion = QuestionBank.get(randomNewQuestion);
-        QuestionBank.remove(randomNewQuestion);
-        currentQuestion.colorID = colorChange(currentQuestion.colorID);
+        if(QuestionBank.size()!=0) {
+            int randomNewQuestion = randomGenerator.nextInt(QuestionBank.size());
+            currentQuestion = QuestionBank.get(randomNewQuestion);
+            QuestionBank.remove(randomNewQuestion);
+            currentQuestion.colorID = colorChange(currentQuestion.colorID);
 
-        Log.d("Ass3", "QuestionBankManager.newQuestion(): QuestionBank.size()= "+QuestionBank.size());
-
-        /*
-        //loops through ArrayList to first remove
-        for(int i = 0; i<QuestionBank.size(); i++){
-            if(currentQuestion==QuestionBank.get(i)){
-                QuestionBank.remove(i);
-            }
+            Log.d("Ass3", "QuestionBankManager.newQuestion(): QuestionBank.size()= " + QuestionBank.size());
         }
-
-         */
-
-
     }
 
 }

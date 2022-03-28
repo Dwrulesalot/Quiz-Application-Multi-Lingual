@@ -19,8 +19,6 @@
     android:layout_height="wrap_content"
     android:padding="5sp"
     android:textColor="@color/black"
-
-    android:text="@string/questionText"
     android:textSize="20sp"
     android:gravity="center"
     app:layout_constraintTop_toTopOf="parent"

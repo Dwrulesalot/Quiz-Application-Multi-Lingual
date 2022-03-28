@@ -3,10 +3,6 @@
     <string name="falseButton">False</string>
     <string name="trueButton">True</string>
 
-    <string name="questionText">Empty Container</string>
-    <!-- TODO: Remove or change this above placeholder text -->
-
-    <!--how/where would I access/loop though the values below?-->
     <string name="question1">Toronto is the capital city of Ontario.</string>
     <string name="question2">Montreal is the capital city of Quebec.</string>
     <string name="question3">Ottawa is the capital city of Quebec.</string>
