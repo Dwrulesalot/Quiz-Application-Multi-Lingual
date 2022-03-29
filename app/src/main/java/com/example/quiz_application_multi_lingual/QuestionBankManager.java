@@ -9,10 +9,17 @@ public class QuestionBankManager {
 
     ArrayList<Question> QuestionBank = new ArrayList<Question>();
 
-    //string resource list in future with each of their translations
+    ArrayList<Question> allQuestions = new ArrayList<Question>();
+
     Question q1 = new Question(R.string.question1, true, 0);
     Question q2 = new Question(R.string.question2, false, 0);
     Question q3 = new Question(R.string.question3, false, 0);
+    Question q4 = new Question(R.string.question4, true, 0);
+    Question q5 = new Question(R.string.question5, true, 0);
+    Question q6 = new Question(R.string.question6, true, 0);
+    Question q7 = new Question(R.string.question7, true, 0);
+    Question q8 = new Question(R.string.question8, true, 0);
+    Question q9 = new Question(R.string.question9, true, 0);
 
     Question currentQuestion;
 
@@ -23,14 +30,52 @@ public class QuestionBankManager {
 
     //have a default constructor and a constructor that takes a # of questions to have in the quiz
     public QuestionBankManager(){
-        //will eventually need to save individual question data and also pull from saved data here?
+        resetQuestionArray();
 
-        //temp
-        QuestionBank.add(q1);
-        QuestionBank.add(q2);
-        QuestionBank.add(q3);
+        addToQuestionBank(3);
 
         newQuestion();
+
+    }
+
+    public QuestionBankManager(int questionAmount){
+        resetQuestionArray();
+
+        addToQuestionBank(questionAmount);
+
+        newQuestion();
+
+    }
+
+    public void resetQuestionArray (){
+        allQuestions.clear();//test that this works as expects
+
+        allQuestions.add(q1);
+        allQuestions.add(q2);
+        allQuestions.add(q3);
+        allQuestions.add(q4);
+        allQuestions.add(q5);
+        allQuestions.add(q6);
+        allQuestions.add(q7);
+        allQuestions.add(q8);
+        allQuestions.add(q9);
+    }
+
+    public void addToQuestionBank(int questionAmount){
+        int randomNum;
+
+        for(int i=0; i<questionAmount;i++){
+            //pick a random question from allQuestions
+            //Add to array - QuestionBank.add();
+            //remove from allQuestions Array
+            randomNum = randomGenerator.nextInt(allQuestions.size());
+            Question newQuestion = allQuestions.get(randomNum);
+            QuestionBank.add(newQuestion);
+            allQuestions.remove(randomNum);
+
+        }
+
+        resetQuestionArray();
 
     }
 
@@ -43,17 +88,17 @@ public class QuestionBankManager {
         }
     }
 
-    public int colorChange(int c){
+    public int colorChange(int oldColorID){
 
-        int newColor = randomGenerator.nextInt(7);
+        int newColor = randomGenerator.nextInt(colorArray.length);
 
         //if it's a different color
-        if(colorArray[newColor]!=c){
+        if(colorArray[newColor]!=oldColorID){
             return colorArray[newColor];
         }
         else {
             //recursive till it's a different color than originally - hopefully not overkill/error prone
-            return colorChange(c);
+            return colorChange(oldColorID);
         }
 
     }
@@ -63,9 +108,16 @@ public class QuestionBankManager {
         //should check if array is empty first
         if(QuestionBank.size()!=0) {
             int randomNewQuestion = randomGenerator.nextInt(QuestionBank.size());
+            int oldColorID;
+            if(currentQuestion!=null) {
+                oldColorID = currentQuestion.colorID;
+            }
+            else{
+                oldColorID = colorArray[0];
+            }
             currentQuestion = QuestionBank.get(randomNewQuestion);
             QuestionBank.remove(randomNewQuestion);
-            currentQuestion.colorID = colorChange(currentQuestion.colorID);
+            currentQuestion.colorID = colorChange(oldColorID);
 
             Log.d("Ass3", "QuestionBankManager.newQuestion(): QuestionBank.size()= " + QuestionBank.size());
         }
