@@ -26,10 +26,10 @@ public class MyApp extends Application {
         progress = 0;
         correctAnswers = 0;
     }
-    //todo add Constructor:  QuestionBankManager(numMaxQuestions)
+
     public void resetQuestionBank(int numMaxQuestions){
 
-        questionBankManager = new QuestionBankManager();
+        questionBankManager = new QuestionBankManager(numMaxQuestions);
 
         maxQuestions = numMaxQuestions;
         progress = 0;

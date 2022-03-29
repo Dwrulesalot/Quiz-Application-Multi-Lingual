@@ -1,19 +1,16 @@
 package com.example.quiz_application_multi_lingual;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
-import java.io.Console;
 
 public class MainActivity extends AppCompatActivity {
     FragmentManager fm = getSupportFragmentManager();//this a good example?
@@ -56,14 +53,14 @@ public class MainActivity extends AppCompatActivity {
         trueBtn = (Button) findViewById(R.id.trueButton);
         trueBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                answerClicked(true, v);
+                answerClicked(true);
             }
         });
 
         falseBtn = (Button) findViewById(R.id.falseButton);
         falseBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                answerClicked(false, v);
+                answerClicked(false);
             }
         });
 
@@ -80,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void answerClicked(boolean answer, View view) {
+    private void answerClicked(boolean answer) {
 
         //todo:
         // summarize/save current quiz progress
@@ -101,13 +98,12 @@ public class MainActivity extends AppCompatActivity {
 
             changeQuestion();
         }
-        //Give dialogue popup with stats
-        else {
-            builder.setTitle("Results");
-            //builder.setMessage("Your purchase is: "+(String) quantity.getText()+" Pants. Your Total is: $"+(String) total.getText());
-            builder.setCancelable(true);
-            builder.setNegativeButton("OK",null);
 
+        if(progress==maxQuestions) {
+            builder.setTitle("Results");
+            builder.setMessage("Your score is: "+correctAnswers+" out of "+maxQuestions);
+            builder.setNegativeButton("IGNORE",null);//change this to just call a reset
+            builder.setPositiveButton("SAVE", onSaveClick());
             builder.show();
         }
 
@@ -129,6 +125,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //this is just auto-called when dialog pops up?
+    public DialogInterface.OnClickListener onSaveClick() {
+        //need this to overwrite/save to filesystem
+        lifeTimeCorrectAnswers+=correctAnswers;
+        lifeTimeTotalQuestions+=maxQuestions;
 
+        resetQuiz();
+
+        return null;
+    }
+
+    public void resetQuiz(){
+        questionBankManager = new QuestionBankManager(maxQuestions);
+        getQuestion();
+        progress = 0;
+        correctAnswers = 0;
+
+        quizProgressBar.setMax(maxQuestions);
+        quizProgressBar.setProgress(progress);
+    }
 
 }
