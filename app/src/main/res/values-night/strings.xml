@@ -6,4 +6,10 @@
     <string name="question1">Toronto is the capital city of Ontario.</string>
     <string name="question2">Montreal is the capital city of Quebec.</string>
     <string name="question3">Ottawa is the capital city of Quebec.</string>
+    <string name="question4">Quebec City is the capital city of Quebec.</string>
+    <string name="question5">Halifax is the capital city of Nova Scotia.</string>
+    <string name="question6">Charlottetown is the capital city of Prince Edward Island.</string>
+    <string name="question7">Winnipeg is the capital city of Manitoba.</string>
+    <string name="question8">Regina is the capital city of Saskatchewan.</string>
+    <string name="question9">Edmonton is the capital city of Alberta.</string>
 </resources>
