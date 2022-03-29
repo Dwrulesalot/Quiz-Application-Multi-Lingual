@@ -10,6 +10,8 @@ public class MyApp extends Application {
     int progress;
     int correctAnswers;
 
+    FileStorageManager storageManager = new FileStorageManager();
+
     public MyApp(){
         questionBankManager = new QuestionBankManager();
 

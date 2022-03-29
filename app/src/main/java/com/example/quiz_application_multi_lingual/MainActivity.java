@@ -13,7 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    FragmentManager fm = getSupportFragmentManager();//this a good example?
+    FragmentManager fm = getSupportFragmentManager();
 
     Button trueBtn;
     Button falseBtn;
@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
     AlertDialog.Builder builder;
 
+    FileStorageManager storageManager;
+
     //todo need to save state to ensure it works when being rotated
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         maxQuestions = ((MyApp)getApplication()).maxQuestions;
         progress = ((MyApp)getApplication()).progress;
         correctAnswers = ((MyApp)getApplication()).correctAnswers;
+        storageManager = ((MyApp)getApplication()).storageManager;
 
         quizProgressBar=(ProgressBar) findViewById(R.id.progressBar);
         quizProgressBar.setMax(maxQuestions);
@@ -74,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
         ((MyApp)getApplication()).progress = progress;
         ((MyApp)getApplication()).correctAnswers = correctAnswers;
 
+        ((MyApp)getApplication()).questionBankManager = questionBankManager;
+        ((MyApp)getApplication()).storageManager = storageManager;
     }
 
 
@@ -86,20 +91,19 @@ public class MainActivity extends AppCompatActivity {
         quizProgressBar.setProgress(progress);
 
         if(!(progress>maxQuestions)){
-            //returns true if correct answer, false if incorrect
+
             if(questionBankManager.checkAnswer(answer)){
                 Toast.makeText(getApplicationContext(), "Correct!!!", Toast.LENGTH_SHORT).show();
                 correctAnswers++;
             }
             else {
                 Toast.makeText(getApplicationContext(), "Incorrect.", Toast.LENGTH_SHORT).show();
-
             }
-
             changeQuestion();
         }
 
         if(progress==maxQuestions) {
+
             builder.setTitle("Results");
             builder.setMessage("Your score is: "+correctAnswers+" out of "+maxQuestions);
             builder.setNegativeButton("IGNORE",new DialogInterface.OnClickListener() {
@@ -116,8 +120,6 @@ public class MainActivity extends AppCompatActivity {
             });
             builder.show();
         }
-
-
     }
 
     public void getQuestion(){
@@ -140,6 +142,12 @@ public class MainActivity extends AppCompatActivity {
         //need this to overwrite/save to filesystem
         lifeTimeCorrectAnswers+=correctAnswers;
         lifeTimeTotalQuestions+=maxQuestions;
+
+        //need to get the current average - will be a string
+        //split/splice the string and change to two ints
+        //add to totals
+        //change back to String
+        //storageManager.updateAverage(this, newAverage);
 
         resetQuiz();
     }
