@@ -102,8 +102,18 @@ public class MainActivity extends AppCompatActivity {
         if(progress==maxQuestions) {
             builder.setTitle("Results");
             builder.setMessage("Your score is: "+correctAnswers+" out of "+maxQuestions);
-            builder.setNegativeButton("IGNORE",null);//change this to just call a reset
-            builder.setPositiveButton("SAVE", onSaveClick());
+            builder.setNegativeButton("IGNORE",new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    resetQuiz();
+                }
+            });
+            builder.setPositiveButton("SAVE",  new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    onSaveClick();
+                }
+            });
             builder.show();
         }
 
@@ -125,15 +135,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //this is just auto-called when dialog pops up?
-    public DialogInterface.OnClickListener onSaveClick() {
+
+    public void onSaveClick() {
         //need this to overwrite/save to filesystem
         lifeTimeCorrectAnswers+=correctAnswers;
         lifeTimeTotalQuestions+=maxQuestions;
 
         resetQuiz();
-
-        return null;
     }
 
     public void resetQuiz(){
