@@ -36,7 +36,7 @@ public class FileStorageManager {
 
 
     }
-    //todo fix this
+
     public String getAverage(Activity context){
         StringBuffer stringBuffer = new StringBuffer();
 

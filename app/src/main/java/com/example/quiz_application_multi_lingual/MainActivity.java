@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
     FileStorageManager storageManager;
 
-    //todo need to save state to ensure it works when being rotated
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,10 +83,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void answerClicked(boolean answer) {
-
-        //todo:
-        // summarize/save current quiz progress
-
         progress++;
         quizProgressBar.setProgress(progress);
 

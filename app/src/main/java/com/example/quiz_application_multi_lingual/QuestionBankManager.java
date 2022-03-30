@@ -48,7 +48,7 @@ public class QuestionBankManager {
     }
 
     public void resetQuestionArray (){
-        allQuestions.clear();//test that this works as expects
+        allQuestions.clear();
 
         allQuestions.add(q1);
         allQuestions.add(q2);
@@ -118,8 +118,6 @@ public class QuestionBankManager {
             currentQuestion = QuestionBank.get(randomNewQuestion);
             QuestionBank.remove(randomNewQuestion);
             currentQuestion.colorID = colorChange(oldColorID);
-
-            Log.d("Ass3", "QuestionBankManager.newQuestion(): QuestionBank.size()= " + QuestionBank.size());
         }
     }
 
