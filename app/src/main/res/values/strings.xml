@@ -12,4 +12,9 @@
     <string name="question7">Winnipeg is the capital city of Manitoba.</string>
     <string name="question8">Regina is the capital city of Saskatchewan.</string>
     <string name="question9">Edmonton is the capital city of Alberta.</string>
+
+    <string name="menuDisplayAverage">Get the Average</string>
+    <string name="menuChangeMaxQuestions">Select the number of Questions</string>
+    <string name="menuResetAverage">Reset saved Results</string>
+
 </resources>
