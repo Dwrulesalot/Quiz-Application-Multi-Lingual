@@ -94,11 +94,11 @@ public class MainActivity extends AppCompatActivity {
         if(!(progress>maxQuestions)){
 
             if(questionBankManager.checkAnswer(answer)){
-                Toast.makeText(getApplicationContext(), "Correct!!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.correct, Toast.LENGTH_SHORT).show();
                 correctAnswers++;
             }
             else {
-                Toast.makeText(getApplicationContext(), "Incorrect.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.incorrect, Toast.LENGTH_SHORT).show();
             }
             changeQuestion();
         }
@@ -106,15 +106,18 @@ public class MainActivity extends AppCompatActivity {
         if(progress==maxQuestions) {
 
             builder = new AlertDialog.Builder(this);
-            builder.setTitle("Results");
-            builder.setMessage("Your score is: "+correctAnswers+" out of "+maxQuestions);
-            builder.setNegativeButton("IGNORE",new DialogInterface.OnClickListener() {
+            builder.setTitle(R.string.resultsTitle);
+            String message1 = this.getResources().getString(R.string.resultsMSG1);
+            String message2 = this.getResources().getString(R.string.resultsMSG2);
+
+            builder.setMessage(message1+" "+correctAnswers+" "+message2+" "+maxQuestions);
+            builder.setNegativeButton(R.string.resultsIgnore,new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     resetQuiz();
                 }
             });
-            builder.setPositiveButton("SAVE",  new DialogInterface.OnClickListener() {
+            builder.setPositiveButton(R.string.resultsSave,  new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     onSaveClick();
@@ -180,10 +183,11 @@ public class MainActivity extends AppCompatActivity {
         builder = new AlertDialog.Builder(this);
         switch (menuItem.getItemId()){
             case R.id.getAverage:
-                builder.setTitle("Average");
-                builder.setMessage("Your Correct Answers / Total Questions Answered : "+ storageManager.getAverage(this));
+                builder.setTitle(R.string.getAverageTitle);
+                String message = this.getResources().getString(R.string.getAverageMessage);
+                builder.setMessage(message+" " + storageManager.getAverage(this));
                 builder.setCancelable(true);
-                builder.setNegativeButton("OK",null);
+                builder.setNegativeButton(R.string.ok,null);
                 builder.show();
                 break;
             case R.id.changeNumberOfQuestions:
@@ -191,16 +195,16 @@ public class MainActivity extends AppCompatActivity {
                 //need write to file for this to work
                 break;
             case R.id.resetSavedAverage:
-                builder.setTitle("Caution!");
-                builder.setMessage("This will permanently delete your previous Average. Are you sure?");
+                builder.setTitle(R.string.resetAverageTitle);
+                builder.setMessage(R.string.resetAverageMessage);
                 builder.setCancelable(true);
-                builder.setPositiveButton("YES",  new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(R.string.yes,  new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         storageManager.resetAverage(MainActivity.this);
                     }
                 });
-                builder.setNegativeButton("NO",null);
+                builder.setNegativeButton(R.string.no,null);
                 builder.show();
                 break;
         }

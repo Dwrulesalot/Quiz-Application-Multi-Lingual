@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">Kartkówka Wielojęzyczna</string>
+<string name="falseButton">Fałszywe</string>
+<string name="trueButton">Prawdziwe</string>
+
+<string name="question1">Toronto jest stolicą Ontario. </string>
+<string name="question2">Montreal jest stolicą Quebec.</string>
+<string name="question3">Ottawa jest stolicą Quebec.</string>
+<string name="question4">Quebec jest stolicą Quebec.</string>
+<string name="question5">Halifax jest stolicą Nova Scotia.</string>
+<string name="question6">Charlottetown jest stolicą Prince Edward Island.</string>
+<string name="question7">Winnipeg jest stolicą Manitoba.</string>
+<string name="question8">Regina jest stolicą Saskatchewan.</string>
+<string name="question9">Edmonton jest stolicą Alberta.</string>
+
+<string name="menuDisplayAverage">Dostań średnią</string>
+<string name="menuChangeMaxQuestions">Wybierz liczbę pytań</string>
+<string name="menuResetAverage">Zresetuj średnią</string>
+
+    <string name="correct">Correct!!!</string>
+    <string name="incorrect">Incorrect.</string>
+
+    <string name="resultsTitle">Wynik</string>
+    <string name="resultsMSG1">Twój wynik to: </string>
+    <string name="resultsMSG2"> z </string>
+    <string name="resultsIgnore">POMIŃ</string>
+    <string name="resultsSave">ZAPIS</string>
+
+    <string name="ok">OK</string>
+    <string name="yes">TAK</string>
+    <string name="no">NIE</string>
+
+    <string name="getAverageTitle">Średnia</string>
+    <string name="getAverageMessage">Twoje prawidłowe odpowiedzi / Razem pytań : </string>
+
+    <string name="resetAverageTitle">Uwaga!</string>
+    <string name="resetAverageMessage">Spowoduje to trwałe usunięcie Twojej poprzedniej średniej. Jesteś pewny? </string>
+
+</resources>

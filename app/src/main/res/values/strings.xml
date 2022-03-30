@@ -17,4 +17,24 @@
     <string name="menuChangeMaxQuestions">Select the number of Questions</string>
     <string name="menuResetAverage">Reset saved Results</string>
 
+    <string name="correct">Correct!!!</string>
+    <string name="incorrect">Incorrect.</string>
+
+    <string name="resultsTitle">Results</string>
+    <string name="resultsMSG1">Your score is: </string>
+    <string name="resultsMSG2"> out of </string>
+    <string name="resultsIgnore">IGNORE</string>
+    <string name="resultsSave">SAVE</string>
+
+    <string name="ok">OK</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+
+    <string name="getAverageTitle">Average</string>
+    <string name="getAverageMessage">Your Correct Answers / Total Questions Answered : </string>
+
+    <string name="resetAverageTitle">Caution!</string>
+    <string name="resetAverageMessage">This will permanently delete your previous Average. Are you sure?</string>
+
+
 </resources>
