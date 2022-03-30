@@ -46,21 +46,6 @@ public class FragmentQuestion extends Fragment {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putInt("CurrentQuestion", questionID);
-        savedInstanceState.putInt("CurrentColor", colorID);
-    }
-/*
-    @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-        questionID = savedInstanceState.getInt("CurrentQuestion");
-        colorID =savedInstanceState.getInt("CurrentColor");
-    }
-*/
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_question, container, false);
         TextView questionTextView = v.findViewById(R.id.questionTextView);

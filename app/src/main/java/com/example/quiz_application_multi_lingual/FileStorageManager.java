@@ -38,35 +38,25 @@ public class FileStorageManager {
     }
     //todo fix this
     public String getAverage(Activity context){
-        String contents;
-        String line;
+        StringBuffer stringBuffer = new StringBuffer();
+
         try {
             fis = context.openFileInput(fileName);
-            InputStreamReader inputStreamReader = new InputStreamReader(fis, StandardCharsets.UTF_8);//what dis
-            StringBuilder stringBuilder = new StringBuilder();
-            try (BufferedReader reader = new BufferedReader(inputStreamReader)){
-               /*
-                line = reader.readLine();
-                while (line!= null) {
-                    stringBuilder.append(line).append()
-                }
-                */
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-
-                //contents = StringBuilder.toString();
+            InputStreamReader inputStreamReader = new InputStreamReader(fis, StandardCharsets.UTF_8);
+            int read;
+            while ((read =inputStreamReader.read())!= -1){
+                stringBuffer.append((char)read);
             }
+            String average = stringBuffer.toString();
+            return average;
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-
-        //temp
-        String average = "0/0";
-        return average;
+        return "Error Calculating Average";
     }
     public void resetAverage(Activity context){
         updateAverage(context, "0/0");

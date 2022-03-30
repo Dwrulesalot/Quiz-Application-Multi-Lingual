@@ -32,10 +32,6 @@ public class MainActivity extends AppCompatActivity {
     int progress;
     int correctAnswers;
 
-    //need to save this later
-    int lifeTimeCorrectAnswers;
-    int lifeTimeTotalQuestions;
-
     AlertDialog.Builder builder;
 
     FileStorageManager storageManager;
@@ -145,15 +141,19 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onSaveClick() {
-        //need this to overwrite/save to filesystem
+
+        String average = storageManager.getAverage(this);
+        String[] bothNum;
+        bothNum = average.split("/", 2);
+        int lifeTimeCorrectAnswers = Integer.parseInt(bothNum[0]);
+        int lifeTimeTotalQuestions = Integer.parseInt(bothNum[1]);
+
         lifeTimeCorrectAnswers+=correctAnswers;
         lifeTimeTotalQuestions+=maxQuestions;
 
-        //need to get the current average - will be a string
-        //split/splice the string and change to two ints
-        //add to totals
-        //change back to String
-        //storageManager.updateAverage(this, newAverage);
+        average = Integer.toString(lifeTimeCorrectAnswers)+"/"+Integer.toString(lifeTimeTotalQuestions);
+
+        storageManager.updateAverage(this, average);
 
         resetQuiz();
     }
