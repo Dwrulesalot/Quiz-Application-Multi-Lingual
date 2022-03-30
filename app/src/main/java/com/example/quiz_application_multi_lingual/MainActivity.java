@@ -1,5 +1,6 @@
 package com.example.quiz_application_multi_lingual;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -7,6 +8,10 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -104,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(progress==maxQuestions) {
 
+            builder = new AlertDialog.Builder(this);
             builder.setTitle("Results");
             builder.setMessage("Your score is: "+correctAnswers+" out of "+maxQuestions);
             builder.setNegativeButton("IGNORE",new DialogInterface.OnClickListener() {
@@ -160,6 +166,45 @@ public class MainActivity extends AppCompatActivity {
 
         quizProgressBar.setMax(maxQuestions);
         quizProgressBar.setProgress(progress);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.app_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem menuItem){
+        super.onOptionsItemSelected(menuItem);
+        builder = new AlertDialog.Builder(this);
+        switch (menuItem.getItemId()){
+            case R.id.getAverage:
+                builder.setTitle("Average");
+                builder.setMessage("Your Correct Answers / Total Questions Answered : "+ storageManager.getAverage(this));
+                builder.setCancelable(true);
+                builder.setNegativeButton("OK",null);
+                builder.show();
+                break;
+            case R.id.changeNumberOfQuestions:
+                //todo: Fragment dialog here
+                //need write to file for this to work
+                break;
+            case R.id.resetSavedAverage:
+                builder.setTitle("Caution!");
+                builder.setMessage("This will permanently delete your previous Average. Are you sure?");
+                builder.setCancelable(true);
+                builder.setPositiveButton("YES",  new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        storageManager.resetAverage(MainActivity.this);
+                    }
+                });
+                builder.setNegativeButton("NO",null);
+                builder.show();
+                break;
+        }
+        return true;
     }
 
 }
