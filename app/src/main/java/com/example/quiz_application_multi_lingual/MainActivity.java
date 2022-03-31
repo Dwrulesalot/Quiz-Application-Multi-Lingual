@@ -19,21 +19,14 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements ChangeMaxQuestionsDialogFragment.DialogClickListener{
     FragmentManager fm = getSupportFragmentManager();
-
     Button trueBtn;
     Button falseBtn;
-
     ProgressBar quizProgressBar;
-
     QuestionBankManager questionBankManager;
-
-    //set max from menu in future and add functionality to QuestionBankManager
     int maxQuestions;
     int progress;
     int correctAnswers;
-
     AlertDialog.Builder builder;
-
     FileStorageManager storageManager;
 
     @Override
@@ -76,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements ChangeMaxQuestion
         ((MyApp)getApplication()).maxQuestions = maxQuestions;
         ((MyApp)getApplication()).progress = progress;
         ((MyApp)getApplication()).correctAnswers = correctAnswers;
-
         ((MyApp)getApplication()).questionBankManager = questionBankManager;
         ((MyApp)getApplication()).storageManager = storageManager;
     }
@@ -87,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements ChangeMaxQuestion
         quizProgressBar.setProgress(progress);
 
         if(!(progress>maxQuestions)){
-
             if(questionBankManager.checkAnswer(answer)){
                 Toast.makeText(getApplicationContext(), R.string.correct, Toast.LENGTH_SHORT).show();
                 correctAnswers++;
@@ -99,7 +90,6 @@ public class MainActivity extends AppCompatActivity implements ChangeMaxQuestion
         }
 
         if(progress==maxQuestions) {
-
             builder = new AlertDialog.Builder(this);
             builder.setTitle(R.string.resultsTitle);
             builder.setMessage(getString(R.string.resultsMSG1)+" "+correctAnswers+" "+getString(R.string.resultsMSG2)+" "+maxQuestions);
@@ -127,29 +117,21 @@ public class MainActivity extends AppCompatActivity implements ChangeMaxQuestion
 
     public void changeQuestion(){
         questionBankManager.newQuestion();
-
         FragmentQuestion fragmentQuestion = FragmentQuestion.newInstance(questionBankManager.currentQuestion.textID, questionBankManager.currentQuestion.colorID);
         fm.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         fm.beginTransaction().replace(R.id.QuestionFragmentContainer, fragmentQuestion).commit();
-
     }
 
-
     public void onSaveClick() {
-
         String average = storageManager.getAverage(this);
         String[] bothNum;
         bothNum = average.split("/", 2);
         int lifeTimeCorrectAnswers = Integer.parseInt(bothNum[0]);
         int lifeTimeTotalQuestions = Integer.parseInt(bothNum[1]);
-
         lifeTimeCorrectAnswers+=correctAnswers;
         lifeTimeTotalQuestions+=maxQuestions;
-
         average = Integer.toString(lifeTimeCorrectAnswers)+"/"+Integer.toString(lifeTimeTotalQuestions);
-
         storageManager.updateAverage(this, average);
-
         resetQuiz();
     }
 
@@ -158,17 +140,18 @@ public class MainActivity extends AppCompatActivity implements ChangeMaxQuestion
         getQuestion();
         progress = 0;
         correctAnswers = 0;
-
         quizProgressBar.setMax(maxQuestions);
         quizProgressBar.setProgress(progress);
     }
 
+    //Menu Creation
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.app_menu, menu);
         return true;
     }
 
+    //Menu Functionality
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem menuItem){
         super.onOptionsItemSelected(menuItem);
@@ -182,8 +165,7 @@ public class MainActivity extends AppCompatActivity implements ChangeMaxQuestion
                 builder.show();
                 break;
             case R.id.changeNumberOfQuestions:
-                //todo: Fragment dialog here
-                onClickMenuChangeMaxQuestions();//current
+                onClickMenuChangeMaxQuestions();
                 break;
             case R.id.resetSavedAverage:
                 builder.setTitle(R.string.resetAverageTitle);
@@ -202,24 +184,15 @@ public class MainActivity extends AppCompatActivity implements ChangeMaxQuestion
         return true;
     }
 
-    //return int? or just do all functionality here?
+    //makes a new Instance of ChangeMaxQuestionsDialogFragment and displays over the activity
     //need to make other buttons not clickable etc?
     public void onClickMenuChangeMaxQuestions(){
-
         ChangeMaxQuestionsDialogFragment dialogFragment = ChangeMaxQuestionsDialogFragment.newInstance();
         dialogFragment.show(fm, ChangeMaxQuestionsDialogFragment.tag);
         dialogFragment.listener = this;
-
-        /*
-        ChangeMaxQuestionsDialogFragment dialogFragment = ChangeMaxQuestionsDialogFragment.newInstance();
-        dialogFragment.listener = this;
-
-        fm.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        fm.beginTransaction().replace(R.id.DialogFragmentContainer, dialogFragment).commit();
-
-*/
     }
 
+    //ChangeMaxQuestionsDialogFragment listener
     @Override
     public void dialogListenerOkClicked(int input) {
         Log.d("Ass3", "MainActivity.dialogListenerOkClicked(int input): input= "+input);
@@ -230,15 +203,14 @@ public class MainActivity extends AppCompatActivity implements ChangeMaxQuestion
             builder.setCancelable(true);
             builder.setNegativeButton(R.string.ok,null);
             builder.show();
-
         }else{
             maxQuestions = input;
             resetQuiz();
         }
     }
 
+    //ChangeMaxQuestionsDialogFragment listener
     @Override
     public void dialogListenerCancelClicked() {
-        //do I need anything here?
     }
 }

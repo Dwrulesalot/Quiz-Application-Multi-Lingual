@@ -11,11 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentQuestion#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FragmentQuestion extends Fragment {
 
     private static final String ARG_QUESTION_ID = "questionIDParam";
@@ -50,10 +45,8 @@ public class FragmentQuestion extends Fragment {
         View v = inflater.inflate(R.layout.fragment_question, container, false);
         TextView questionTextView = v.findViewById(R.id.questionTextView);
         ConstraintLayout constraintLayout = v.findViewById(R.id.currentQuestionLayout);
-
         constraintLayout.setBackgroundResource(colorID);
         questionTextView.setText(questionID);
-
         return v;
     }
 }

@@ -15,16 +15,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ChangeMaxQuestionsDialogFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ChangeMaxQuestionsDialogFragment extends DialogFragment {
 
-
     public DialogClickListener listener;
-
     public static final String tag = "tag";
 
     public interface DialogClickListener{
@@ -33,7 +26,6 @@ public class ChangeMaxQuestionsDialogFragment extends DialogFragment {
     }
 
     public ChangeMaxQuestionsDialogFragment() {
-        // Required empty public constructor
     }
 
     public static ChangeMaxQuestionsDialogFragment newInstance() {
@@ -48,17 +40,17 @@ public class ChangeMaxQuestionsDialogFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_change_max_questions_dialog, container, false);
-
         EditText editText = v.findViewById(R.id.maxQuestionInput);
 
         Button ok = v.findViewById(R.id.fragmentDialogOkButton);
         ok.setOnClickListener(new View.OnClickListener(){
+            //OnClick that sends user input to MainActivity listener
             @Override
             public void onClick(View view){
-                //if not empty or an int between 1-9 - give error else return back to main activity with new max questions
                 if (editText.getText().toString().isEmpty()){
                     listener.dialogListenerOkClicked(-1);
                 }
@@ -69,7 +61,6 @@ public class ChangeMaxQuestionsDialogFragment extends DialogFragment {
                     listener.dialogListenerOkClicked(Integer.parseInt(editText.getText().toString()));
                     dismiss();
                 }
-
             }
         });
         Button cancel = v.findViewById(R.id.fragmentDialogCancelButton);
@@ -81,8 +72,6 @@ public class ChangeMaxQuestionsDialogFragment extends DialogFragment {
                 dismiss();
             }
         });
-
-        // Inflate the layout for this fragment
         return v;
     }
 }

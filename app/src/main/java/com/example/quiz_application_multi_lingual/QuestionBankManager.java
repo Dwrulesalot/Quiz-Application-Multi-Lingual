@@ -8,7 +8,6 @@ import java.util.Random;
 public class QuestionBankManager {
 
     ArrayList<Question> QuestionBank = new ArrayList<Question>();
-
     ArrayList<Question> allQuestions = new ArrayList<Question>();
 
     Question q1 = new Question(R.string.question1, true, 0);
@@ -22,34 +21,25 @@ public class QuestionBankManager {
     Question q9 = new Question(R.string.question9, true, 0);
 
     Question currentQuestion;
-
     int[] colorArray = {R.color.purple_200, R.color.purple_500, R.color.purple_700, R.color.teal_200, R.color.teal_700, R.color.red, R.color.pink};
-
     Random randomGenerator = new Random();
 
-
-    //have a default constructor and a constructor that takes a # of questions to have in the quiz
+    //Default constructor
     public QuestionBankManager(){
         resetQuestionArray();
-
         addToQuestionBank(3);
-
         newQuestion();
-
     }
 
+    //Constructor that takes a # of questions to have in the quiz
     public QuestionBankManager(int questionAmount){
         resetQuestionArray();
-
         addToQuestionBank(questionAmount);
-
         newQuestion();
-
     }
 
     public void resetQuestionArray (){
         allQuestions.clear();
-
         allQuestions.add(q1);
         allQuestions.add(q2);
         allQuestions.add(q3);
@@ -61,22 +51,18 @@ public class QuestionBankManager {
         allQuestions.add(q9);
     }
 
+    //Uses randomGenerator to randomize order of questions
+    //Ensures no duplicate questions in a quiz
     public void addToQuestionBank(int questionAmount){
         int randomNum;
 
         for(int i=0; i<questionAmount;i++){
-            //pick a random question from allQuestions
-            //Add to array - QuestionBank.add();
-            //remove from allQuestions Array
             randomNum = randomGenerator.nextInt(allQuestions.size());
             Question newQuestion = allQuestions.get(randomNum);
             QuestionBank.add(newQuestion);
             allQuestions.remove(randomNum);
-
         }
-
         resetQuestionArray();
-
     }
 
     public boolean checkAnswer(boolean a){
@@ -89,22 +75,18 @@ public class QuestionBankManager {
     }
 
     public int colorChange(int oldColorID){
-
         int newColor = randomGenerator.nextInt(colorArray.length);
-
         //if it's a different color
         if(colorArray[newColor]!=oldColorID){
             return colorArray[newColor];
         }
         else {
-            //recursive till it's a different color than originally - hopefully not overkill/error prone
+            //recursive until it's a different color
             return colorChange(oldColorID);
         }
-
     }
 
     public void newQuestion(){
-
         //Checks if array is empty first
         if(QuestionBank.size()!=0) {
             int randomNewQuestion = randomGenerator.nextInt(QuestionBank.size());
@@ -120,5 +102,4 @@ public class QuestionBankManager {
             currentQuestion.colorID = colorChange(oldColorID);
         }
     }
-
 }

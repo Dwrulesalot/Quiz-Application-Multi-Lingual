@@ -1,6 +1,5 @@
 package com.example.quiz_application_multi_lingual;
 
-//
 public class Question {
 
     int textID;

@@ -21,7 +21,6 @@ public class FileStorageManager {
         try{
             fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
             fos.write(newAverage.getBytes());
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -33,13 +32,10 @@ public class FileStorageManager {
                 e.printStackTrace();
             }
         }
-
-
     }
 
     public String getAverage(Activity context){
         StringBuffer stringBuffer = new StringBuffer();
-
         try {
             fis = context.openFileInput(fileName);
             InputStreamReader inputStreamReader = new InputStreamReader(fis, StandardCharsets.UTF_8);
@@ -49,13 +45,11 @@ public class FileStorageManager {
             }
             String average = stringBuffer.toString();
             return average;
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return "Error Calculating Average";
     }
     public void resetAverage(Activity context){
