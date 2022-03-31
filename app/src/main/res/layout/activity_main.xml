@@ -49,23 +49,13 @@
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline1"
         app:layout_constraintTop_toTopOf="@+id/horizontalGuideline1" />
 
-
-    <!--    How do I change the below text when changing questions?
-            Can I set them to variable that I set elsewhere?
-            Hint says to create a model per question containing color
-            as well as a question bank model to manage and shuffle the questions/colors
-            if background color is gray/ need to also change text color?
-
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/QuestionFragmentContainer"
+        android:id="@+id/DialogFragmentContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:name="com.example.quiz_application_multi_lingual."
+        android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/horizontalGuideline1"
+        app:layout_constraintBottom_toBottomOf="parent"
         />
-
-        -->
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/QuestionFragmentContainer"

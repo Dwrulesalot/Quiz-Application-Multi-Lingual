@@ -6,12 +6,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".FragmentQuestion"
     android:id="@+id/currentQuestionLayout">
-<!--    How do I change the above background and below text when changing questions?
-        Can I set them to variable that I set elsewhere?
-        Hint says to create a model per question containing color
-        as well as a question bank model to manage and shuffle the questions/colors
-        if background color is gray/ need to also change text color?-->
-
 
 <TextView
     android:id="@+id/questionTextView"
