@@ -105,7 +105,7 @@ public class QuestionBankManager {
 
     public void newQuestion(){
 
-        //should check if array is empty first
+        //Checks if array is empty first
         if(QuestionBank.size()!=0) {
             int randomNewQuestion = randomGenerator.nextInt(QuestionBank.size());
             int oldColorID;

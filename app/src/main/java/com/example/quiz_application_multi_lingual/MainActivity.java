@@ -17,7 +17,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ChangeMaxQuestionsDialogFragment.DialogClickListener{
     FragmentManager fm = getSupportFragmentManager();
 
     Button trueBtn;
@@ -102,10 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
             builder = new AlertDialog.Builder(this);
             builder.setTitle(R.string.resultsTitle);
-            String message1 = this.getResources().getString(R.string.resultsMSG1);
-            String message2 = this.getResources().getString(R.string.resultsMSG2);
-
-            builder.setMessage(message1+" "+correctAnswers+" "+message2+" "+maxQuestions);
+            builder.setMessage(getString(R.string.resultsMSG1)+" "+correctAnswers+" "+getString(R.string.resultsMSG2)+" "+maxQuestions);
             builder.setNegativeButton(R.string.resultsIgnore,new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -179,15 +176,14 @@ public class MainActivity extends AppCompatActivity {
         switch (menuItem.getItemId()){
             case R.id.getAverage:
                 builder.setTitle(R.string.getAverageTitle);
-                String message = this.getResources().getString(R.string.getAverageMessage);
-                builder.setMessage(message+" " + storageManager.getAverage(this));
+                builder.setMessage(getString(R.string.getAverageMessage)+" " + storageManager.getAverage(this));
                 builder.setCancelable(true);
                 builder.setNegativeButton(R.string.ok,null);
                 builder.show();
                 break;
             case R.id.changeNumberOfQuestions:
                 //todo: Fragment dialog here
-                //need write to file for this to work
+                onClickMenuChangeMaxQuestions();//current
                 break;
             case R.id.resetSavedAverage:
                 builder.setTitle(R.string.resetAverageTitle);
@@ -206,4 +202,43 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    //return int? or just do all functionality here?
+    //need to make other buttons not clickable etc?
+    public void onClickMenuChangeMaxQuestions(){
+
+        ChangeMaxQuestionsDialogFragment dialogFragment = ChangeMaxQuestionsDialogFragment.newInstance();
+        dialogFragment.show(fm, ChangeMaxQuestionsDialogFragment.tag);
+        dialogFragment.listener = this;
+
+        /*
+        ChangeMaxQuestionsDialogFragment dialogFragment = ChangeMaxQuestionsDialogFragment.newInstance();
+        dialogFragment.listener = this;
+
+        fm.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        fm.beginTransaction().replace(R.id.DialogFragmentContainer, dialogFragment).commit();
+
+*/
+    }
+
+    @Override
+    public void dialogListenerOkClicked(int input) {
+        Log.d("Ass3", "MainActivity.dialogListenerOkClicked(int input): input= "+input);
+        if(input==-1){
+            builder = new AlertDialog.Builder(this);
+            builder.setTitle(R.string.changeMaxQuestionsErrorTitle);
+            builder.setMessage(R.string.changeMaxQuestionsErrorMessage);
+            builder.setCancelable(true);
+            builder.setNegativeButton(R.string.ok,null);
+            builder.show();
+
+        }else{
+            maxQuestions = input;
+            resetQuiz();
+        }
+    }
+
+    @Override
+    public void dialogListenerCancelClicked() {
+        //do I need anything here?
+    }
 }
