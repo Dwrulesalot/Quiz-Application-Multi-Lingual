@@ -36,5 +36,11 @@
     <string name="resetAverageTitle">Caution!</string>
     <string name="resetAverageMessage">This will permanently delete your previous Average. Are you sure?</string>
 
+    <string name="textInputHint">Enter the number of Questions.</string>
+    <string name="cancel">CANCEL</string>
+
+    <string name="changeMaxQuestionsErrorTitle">Error!</string>
+    <string name="changeMaxQuestionsErrorMessage">You must enter a number from 1 to 9 </string>
+
 
 </resources>

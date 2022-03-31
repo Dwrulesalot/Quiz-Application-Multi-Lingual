@@ -18,8 +18,8 @@
 <string name="menuChangeMaxQuestions">Wybierz liczbę pytań</string>
 <string name="menuResetAverage">Zresetuj średnią</string>
 
-    <string name="correct">Correct!!!</string>
-    <string name="incorrect">Incorrect.</string>
+    <string name="correct">Prawidłowa odpowiedź!!!</string>
+    <string name="incorrect">Nieprawidłowa odpowiedź.</string>
 
     <string name="resultsTitle">Wynik</string>
     <string name="resultsMSG1">Twój wynik to: </string>
@@ -36,5 +36,11 @@
 
     <string name="resetAverageTitle">Uwaga!</string>
     <string name="resetAverageMessage">Spowoduje to trwałe usunięcie Twojej poprzedniej średniej. Jesteś pewny? </string>
+
+    <string name="textInputHint">Wpisz liczbę pytań.</string>
+    <string name="cancel">ANULUJ</string>
+
+    <string name="changeMaxQuestionsErrorTitle">Błąd! </string>
+    <string name="changeMaxQuestionsErrorMessage">Musisz wpisać liczbę od 1 do 9</string>
 
 </resources>
