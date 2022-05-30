@@ -38,6 +38,7 @@ public class QuestionBankManager {
         newQuestion();
     }
 
+
     public void resetQuestionArray (){
         allQuestions.clear();
         allQuestions.add(q1);
@@ -65,6 +66,7 @@ public class QuestionBankManager {
         resetQuestionArray();
     }
 
+    //Verifies if answer is correct
     public boolean checkAnswer(boolean a){
         if(a==currentQuestion.answer){
             return true;
@@ -74,6 +76,7 @@ public class QuestionBankManager {
         }
     }
 
+    //Changes the Current question background to a different color on question change
     public int colorChange(int oldColorID){
         int newColor = randomGenerator.nextInt(colorArray.length);
         //if it's a different color
@@ -86,11 +89,13 @@ public class QuestionBankManager {
         }
     }
 
+    //Replaces current question with a new question that has not been used yet
     public void newQuestion(){
         //Checks if array is empty first
         if(QuestionBank.size()!=0) {
             int randomNewQuestion = randomGenerator.nextInt(QuestionBank.size());
             int oldColorID;
+            //If this isn't the first question
             if(currentQuestion!=null) {
                 oldColorID = currentQuestion.colorID;
             }

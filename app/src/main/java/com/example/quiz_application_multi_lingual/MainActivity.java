@@ -73,7 +73,8 @@ public class MainActivity extends AppCompatActivity implements ChangeMaxQuestion
         ((MyApp)getApplication()).storageManager = storageManager;
     }
 
-
+    //Checks if the correct answer was clicked (true/false)
+    //Handles dialog for Quiz results
     private void answerClicked(boolean answer) {
         progress++;
         quizProgressBar.setProgress(progress);
@@ -109,12 +110,14 @@ public class MainActivity extends AppCompatActivity implements ChangeMaxQuestion
         }
     }
 
+    //Shows the currentQuestion from the questionBankManager on the fragment
     public void getQuestion(){
         FragmentQuestion fragmentQuestion = FragmentQuestion.newInstance(questionBankManager.currentQuestion.textID, questionBankManager.currentQuestion.colorID);
         fm.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         fm.beginTransaction().replace(R.id.QuestionFragmentContainer, fragmentQuestion).commit();
     }
 
+    //Changes the currentQuestion from the questionBankManager and displays the question on our fragment
     public void changeQuestion(){
         questionBankManager.newQuestion();
         FragmentQuestion fragmentQuestion = FragmentQuestion.newInstance(questionBankManager.currentQuestion.textID, questionBankManager.currentQuestion.colorID);
@@ -122,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements ChangeMaxQuestion
         fm.beginTransaction().replace(R.id.QuestionFragmentContainer, fragmentQuestion).commit();
     }
 
+    //Saves/Stores the current quiz's score.
     public void onSaveClick() {
         String average = storageManager.getAverage(this);
         String[] bothNum;
@@ -135,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements ChangeMaxQuestion
         resetQuiz();
     }
 
+    //Resets the current quiz
     public void resetQuiz(){
         questionBankManager = new QuestionBankManager(maxQuestions);
         getQuestion();
@@ -151,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements ChangeMaxQuestion
         return true;
     }
 
-    //Menu Functionality
+    //Menu Functionality for three options
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem menuItem){
         super.onOptionsItemSelected(menuItem);
@@ -184,8 +189,7 @@ public class MainActivity extends AppCompatActivity implements ChangeMaxQuestion
         return true;
     }
 
-    //makes a new Instance of ChangeMaxQuestionsDialogFragment and displays over the activity
-    //need to make other buttons not clickable etc?
+    //Makes a new Instance of ChangeMaxQuestionsDialogFragment and displays over the activity
     public void onClickMenuChangeMaxQuestions(){
         ChangeMaxQuestionsDialogFragment dialogFragment = ChangeMaxQuestionsDialogFragment.newInstance();
         dialogFragment.show(fm, ChangeMaxQuestionsDialogFragment.tag);
@@ -193,6 +197,7 @@ public class MainActivity extends AppCompatActivity implements ChangeMaxQuestion
     }
 
     //ChangeMaxQuestionsDialogFragment listener
+    //If user input is a # 1-9 sets the max questions to the input
     @Override
     public void dialogListenerOkClicked(int input) {
         Log.d("Ass3", "MainActivity.dialogListenerOkClicked(int input): input= "+input);

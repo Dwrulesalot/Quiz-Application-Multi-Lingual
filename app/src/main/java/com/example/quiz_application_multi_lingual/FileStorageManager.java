@@ -17,6 +17,7 @@ public class FileStorageManager {
     FileOutputStream fos;
     FileInputStream fis;
 
+    //Overwrites previous data in Average.txt
     public void updateAverage(Activity context, String newAverage){
         try{
             fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
@@ -34,13 +35,14 @@ public class FileStorageManager {
         }
     }
 
+    //Reads and returns string of the average from the file
     public String getAverage(Activity context){
         StringBuffer stringBuffer = new StringBuffer();
         try {
             fis = context.openFileInput(fileName);
             InputStreamReader inputStreamReader = new InputStreamReader(fis, StandardCharsets.UTF_8);
             int read;
-            while ((read =inputStreamReader.read())!= -1){
+            while ((read = inputStreamReader.read())!= -1){
                 stringBuffer.append((char)read);
             }
             String average = stringBuffer.toString();
@@ -52,6 +54,8 @@ public class FileStorageManager {
         }
         return "Error Calculating Average";
     }
+
+    //Resets Average.txt to 0/0
     public void resetAverage(Activity context){
         updateAverage(context, "0/0");
     }

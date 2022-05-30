@@ -4,30 +4,13 @@ import android.app.Application;
 
 public class MyApp extends Application {
 
-    QuestionBankManager questionBankManager;
-    int maxQuestions;
-    int progress;
-    int correctAnswers;
+    //Quiz defaults
+    QuestionBankManager questionBankManager = new QuestionBankManager();
+    int maxQuestions = 3;
+    int progress = 0;
+    int correctAnswers = 0;
     FileStorageManager storageManager = new FileStorageManager();
 
     public MyApp(){
-        questionBankManager = new QuestionBankManager();
-        maxQuestions = 3;
-        progress = 0;
-        correctAnswers = 0;
-    }
-
-    public void resetQuestionBank(){
-        questionBankManager = new QuestionBankManager();
-        maxQuestions = 3;
-        progress = 0;
-        correctAnswers = 0;
-    }
-
-    public void resetQuestionBank(int numMaxQuestions){
-        questionBankManager = new QuestionBankManager(numMaxQuestions);
-        maxQuestions = numMaxQuestions;
-        progress = 0;
-        correctAnswers = 0;
     }
 }

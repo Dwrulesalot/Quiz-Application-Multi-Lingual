@@ -22,6 +22,7 @@ public class FragmentQuestion extends Fragment {
     public FragmentQuestion() {
     }
 
+    //New Instance of a Question Fragment
     public static FragmentQuestion newInstance(int questionResourceID, int colorResourceID) {
         FragmentQuestion fragment = new FragmentQuestion();
         Bundle args = new Bundle();

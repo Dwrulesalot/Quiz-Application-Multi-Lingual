@@ -28,6 +28,7 @@ public class ChangeMaxQuestionsDialogFragment extends DialogFragment {
     public ChangeMaxQuestionsDialogFragment() {
     }
 
+    //New Instance of a ChangeMaxQuestionsDialogFragment Fragment (the popup when you click to change max questions)
     public static ChangeMaxQuestionsDialogFragment newInstance() {
         ChangeMaxQuestionsDialogFragment fragment = new ChangeMaxQuestionsDialogFragment();
         Bundle args = new Bundle();
